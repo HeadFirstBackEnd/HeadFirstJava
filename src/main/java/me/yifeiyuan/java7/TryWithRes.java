@@ -1,6 +1,6 @@
-package me.yifeiyuan;
+package me.yifeiyuan.java7;
 
-public class Java8StreamTest {
+public class TryWithRes {
 
 
     public static void main(String[] args) {
