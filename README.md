@@ -1,5 +1,5 @@
 # HeadFirstJava
 
 
-学 Java
+学习一下 Java
 
