@@ -2,6 +2,7 @@ package me.yifeiyuan.java8;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class OptionalAPI {
 
@@ -9,7 +10,27 @@ public class OptionalAPI {
     public static void main(String[] args) {
         nonNullOptional();
 
-        nullableOptional();
+//        nullableOptional();
+
+        Optional<String> optional = Optional.of("optional");
+
+        try {
+            Optional empty = Optional.empty();
+            empty.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Optional.empty().orElseThrow(new Supplier<Throwable>() {
+                @Override
+                public Throwable get() {
+                    return new NullPointerException("or else throw");
+                }
+            });
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     private static void nullableOptional() {
