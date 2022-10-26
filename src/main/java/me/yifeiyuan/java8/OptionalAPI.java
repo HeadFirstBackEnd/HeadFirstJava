@@ -7,6 +7,18 @@ public class OptionalAPI {
 
 
     public static void main(String[] args) {
+        nonNullOptional();
+
+        nullableOptional();
+    }
+
+    private static void nullableOptional() {
+        Optional<String> nullable = Optional.ofNullable(null);
+
+        nullable.get();
+    }
+
+    private static void nonNullOptional() {
         Optional<String> name = Optional.ofNullable("Fitz");
         //如果 value 不为 null，则执行
         name.ifPresent(v->{
