@@ -2,6 +2,7 @@ package me.yifeiyuan.java8;
 
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,8 +36,9 @@ public class StreamAPI {
 
     public static void main(String[] args) {
 
-        streamCreation();
+        reduce();
 
+        streamCreation();
 
         anyMatchAPI();
         allMatchAPI();
@@ -46,6 +48,23 @@ public class StreamAPI {
         terminalOperations();
 
         parallelStream();
+    }
+
+    private static void reduce() {
+        List<Integer> i = new ArrayList<>();
+        i.add(1);
+        i.add(3);
+        i.add(2);
+        i.add(1);
+
+       int sum = i.stream().reduce(new BinaryOperator<Integer>() {
+            @Override
+            public Integer apply(Integer integer, Integer integer2) {
+                return integer + integer2;
+            }
+        }).get();
+
+        System.out.println("sum ="+sum);
     }
 
     private static void parallelStream() {

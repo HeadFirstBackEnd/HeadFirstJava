@@ -7,8 +7,10 @@
     </Appenders>
     <Loggers>
 
-        <Logger name="foo" additivity="false" level="warn"/>
-        <Root>
+        <Logger name="foo" additivity="false" level="warn">
+            <AppenderRef ref="project"></AppenderRef>
+        </Logger>
+        <Root level="info">
             <AppenderRef ref="project"/>
         </Root>
     </Loggers>
