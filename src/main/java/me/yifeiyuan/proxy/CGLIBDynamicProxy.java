@@ -6,7 +6,10 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
-public class CGLIBProxy {
+/**
+ * CGLIB 动态代理
+ */
+public class CGLIBDynamicProxy {
 
     interface Greeting {
         void hello(String name);
@@ -31,7 +34,12 @@ public class CGLIBProxy {
 
         @Override
         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            //调用原来 proxy 逻辑
             method.invoke(target, args);
+            //增加扩展能力
+            if ("hello".equals(method.getName())) {
+                System.out.println("来了老弟！~");
+            }
             return null;
         }
 
@@ -50,5 +58,9 @@ public class CGLIBProxy {
 
         Greeting proxy = (Greeting) cglibProxy.createProxy();
         proxy.hello("程序亦非猿");
+
+        //可以生成 GreetingImpl 实现类
+        GreetingImpl proxy2 = (GreetingImpl) cglibProxy.createProxy();
+        proxy2.hello("程序亦非猿");
     }
 }
