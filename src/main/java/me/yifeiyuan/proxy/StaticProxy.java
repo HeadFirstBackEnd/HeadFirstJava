@@ -5,8 +5,14 @@ public class StaticProxy {
 
 
     interface Greeting {
-
         void hello(String name);
+    }
+
+    static class GreetingImpl implements Greeting {
+        @Override
+        public void hello(String name) {
+            System.out.println("Hello," + name);
+        }
     }
 
     static class GreetingProxy implements Greeting {
@@ -25,12 +31,7 @@ public class StaticProxy {
 
     public static void main(String[] args) {
 
-        Greeting target = new Greeting() {
-            @Override
-            public void hello(String name) {
-                System.out.println("Hello," + name);
-            }
-        };
+        Greeting target = new GreetingImpl();
 
         GreetingProxy proxy = new GreetingProxy(target);
 
