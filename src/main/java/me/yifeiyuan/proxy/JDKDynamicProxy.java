@@ -27,11 +27,11 @@ public class JDKDynamicProxy {
 //        normalUsecase1();
 //        normalUsecase2();
 
-//        testDynamicProxy();
+        testDynamicProxy();
         //抛异常用例
 //        testDynamicProxy2();
 
-        testDynamicProxyImpl();
+//        testDynamicProxyImpl();
     }
 
     private static void normalUsecase1() {
