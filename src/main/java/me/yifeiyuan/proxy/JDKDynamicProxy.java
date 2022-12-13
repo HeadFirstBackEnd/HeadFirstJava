@@ -16,11 +16,24 @@ public class JDKDynamicProxy {
 
     public static void main(String[] args) {
 
+        Greeting greeting = new Greeting() {
+            @Override
+            public void hello(String name) {
+                System.out.println("Hello,"+name);
+            }
+        };
+
+        greeting.hello("程序亦非猿");
+
+        testDynamicProxy();
+    }
+
+    private static void testDynamicProxy() {
         InvocationHandler handler = new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if ("hello".equals(method.getName())) {
-                    System.out.println("Hello, " + args[0]);
+                    System.out.println("Hello," + args[0]);
                 }
                 return null;
             }
