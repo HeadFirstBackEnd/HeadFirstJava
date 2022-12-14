@@ -24,6 +24,10 @@ public class JDKDynamicProxy {
 
     public static void main(String[] args) {
 
+        //保存 proxy 生成的 class 文件
+        System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+
+
 //        normalUsecase1();
 //        normalUsecase2();
 

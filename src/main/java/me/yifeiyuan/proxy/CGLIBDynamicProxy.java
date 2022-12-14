@@ -35,7 +35,8 @@ public class CGLIBDynamicProxy {
         @Override
         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
             //调用原来 proxy 逻辑
-            method.invoke(target, args);
+//            method.invoke(target, args);
+            proxy.invokeSuper(obj, args);
             //增加扩展能力
             if ("hello".equals(method.getName())) {
                 System.out.println("来了老弟！~");
