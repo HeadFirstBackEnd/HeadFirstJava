@@ -39,6 +39,11 @@ public class ThreadLocalDemo {
         sIntegerThreadLocal.remove();
         System.out.println(sIntegerThreadLocal.get());//null
 
+        sIntegerThreadLocal.set(1);
+        sIntegerThreadLocal.set(2);
+        sIntegerThreadLocal.set(3);
+
+
         System.out.println(sIntegerThreadLocal2.get());//123
 
         System.out.println(sIntegerThreadLocal3.get());//111
