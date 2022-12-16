@@ -3,9 +3,9 @@ package me.yifeiyuan.concurrent;
 import sun.nio.ch.ThreadPool;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * 线程池
  */
 public class ThreadPoolDemo {
@@ -13,20 +13,26 @@ public class ThreadPoolDemo {
     public static void main(String[] args) {
 
         int corePoolSize = 5;
-        int maximumPoolSize = 128;
+        int maximumPoolSize = 5;
         long keepAliveTime = 3_000;
         TimeUnit unit = TimeUnit.MILLISECONDS;
         BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<>(128);
 
         ThreadFactory threadFactory = new ThreadFactory() {
+
+            AtomicInteger atomicInteger = new AtomicInteger(0);
             @Override
             public Thread newThread(Runnable r) {
                 Thread thread = new Thread(r);
+                Integer id = atomicInteger.incrementAndGet();
+                thread.setName("T,id:"+id);
+                thread.setDaemon(false);
+                thread.setPriority(Thread.NORM_PRIORITY);
                 return thread;
             }
         };
 
-        MyThreadPool myThreadPool = new MyThreadPool(corePoolSize, maximumPoolSize, keepAliveTime, unit, blockingQueue,threadFactory);
+        MyThreadPool myThreadPool = new MyThreadPool(corePoolSize, maximumPoolSize, keepAliveTime, unit, blockingQueue, threadFactory);
 
         for (int i = 0; i < 100; i++) {
             final int value = i;
@@ -34,7 +40,7 @@ public class ThreadPoolDemo {
                 public void run() {
                     try {
                         Thread.sleep(100);
-                        System.out.println("name="+Thread.currentThread().getName()+",value="+value);
+                        System.out.println("name=" + Thread.currentThread().getName() + ",value=" + value);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
