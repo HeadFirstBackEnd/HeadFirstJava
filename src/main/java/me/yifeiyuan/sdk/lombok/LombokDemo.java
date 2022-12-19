@@ -1,9 +1,7 @@
 package me.yifeiyuan.sdk.lombok;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 public class LombokDemo {
 
@@ -42,8 +40,8 @@ public class LombokDemo {
 
         @Setter(lombok.AccessLevel.PUBLIC)
         private Integer b;
-
     }
+
     private static void getterSetter() {
         FooGetterSetter getterSetter = new FooGetterSetter();
         getterSetter.setA("A");
@@ -64,5 +62,15 @@ public class LombokDemo {
         foo.getA();
         foo.setB(1);
         foo.getB();
+    }
+
+    @Slf4j(topic = "Slf4j-Lombok")
+    @ToString
+    static class Slf4jDemo{
+        public static void logTest(){
+        }
+    }
+    private static void testSlf4j() {
+
     }
 }
